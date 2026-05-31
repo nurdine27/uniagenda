@@ -1,0 +1,23 @@
+# Módulos do Node
+node_modules/
+frontend/node_modules/
+
+# Expo e arquivos temporários do Metro
+.expo/
+frontend/.expo/
+dist/
+web-build/
+
+# Logs e erros
+*.log
+npm-debug.log*
+
+# Configurações locais
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Variáveis de ambiente
+.env
+.env.*

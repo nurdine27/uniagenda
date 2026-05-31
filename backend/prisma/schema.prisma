@@ -1,0 +1,98 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  ESTUDANTE
+  DOCENTE
+  ADMIN
+}
+
+enum MeetingStatus {
+  PENDENTE
+  CONFIRMADA
+  RECUSADA
+  CANCELADA
+  CONCLUIDA
+}
+
+model User {
+  id           Int      @id @default(autoincrement())
+  nome         String
+  email        String   @unique
+  password     String
+  role         Role     @default(ESTUDANTE)
+  curso        String?
+  departamento String?
+  avatar       String?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  disponibilidades Disponibilidade[]
+  pedidosEnviados  Meeting[] @relation("Estudante")
+  pedidosRecebidos Meeting[] @relation("Docente")
+  mensagens        Message[]
+  avaliacoes       Avaliacao[]
+}
+
+model Disponibilidade {
+  id         Int      @id @default(autoincrement())
+  docenteId  Int
+  diaSemana  Int
+  horaInicio String
+  horaFim    String
+  duracao    Int      @default(30)
+  ativo      Boolean  @default(true)
+  createdAt  DateTime @default(now())
+
+  docente User @relation(fields: [docenteId], references: [id])
+}
+
+model Meeting {
+  id           Int           @id @default(autoincrement())
+  estudanteId  Int
+  docenteId    Int
+  titulo       String
+  descricao    String?
+  data         DateTime
+  horaInicio   String
+  horaFim      String
+  status       MeetingStatus @default(PENDENTE)
+  motivoRecusa String?
+  local        String?
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+
+  estudante  User       @relation("Estudante", fields: [estudanteId], references: [id])
+  docente    User       @relation("Docente", fields: [docenteId], references: [id])
+  mensagens  Message[]
+  avaliacao  Avaliacao?
+}
+
+model Message {
+  id        Int      @id @default(autoincrement())
+  meetingId Int
+  userId    Int
+  texto     String
+  createdAt DateTime @default(now())
+
+  meeting Meeting @relation(fields: [meetingId], references: [id])
+  user    User    @relation(fields: [userId], references: [id])
+}
+
+model Avaliacao {
+  id         Int      @id @default(autoincrement())
+  meetingId  Int      @unique
+  userId     Int
+  estrelas   Int
+  comentario String?
+  createdAt  DateTime @default(now())
+
+  meeting Meeting @relation(fields: [meetingId], references: [id])
+  user    User    @relation(fields: [userId], references: [id])
+}
