@@ -65,7 +65,7 @@ Olhe para o terminal do Expo (ou digite `ipconfig` num novo terminal) e localize
 Abra `frontend\src\services\api.js` e atualize a URL com o seu IP e a porta do **Backend (3000)**:
 
 ```javascript
-const API_URL = '[http://192.168.43.15:3000/api](http://192.168.43.15:3000/api)'; 
+const API_URL = '[http://192.168.43.15:3000/api]'; 
 
 ```
 
@@ -121,7 +121,5 @@ cd frontend && npx expo start
 
 ---
 
-*UniAgenda © 2026 — G2ENSW1LAB2026 — Universidade Zambeze*
-
-```
+*UniAgenda © 2026*
 
