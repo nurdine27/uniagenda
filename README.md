@@ -1,8 +1,4 @@
-Aqui está o seu documento transformado num **Guia Rápido ultra-otimizado**, focado em comandos diretos, ações rápidas e com correções cruciais baseadas no que acabamos de resolver na prática (como o uso de `--legacy-peer-deps` e o suporte a Hotspot/Tunnel).
 
-Mantenha o formato como `.md` (Markdown):
-
-```markdown
 # ⚡ UniAgenda — Guia Rápido (Windows)
 > Do zero ao telemóvel em minutos.
 
@@ -129,4 +125,3 @@ cd frontend && npx expo start
 
 ```
 
-```
